@@ -1,5 +1,7 @@
 from urlextract import URLExtract
 from wordcloud import WordCloud
+import emoji
+from collections import Counter
 
 extract = URLExtract()
 
@@ -109,5 +111,18 @@ def create_wordcloud(selected_user,df):
     df_wc=wc.generate(text)
     return df_wc
 
+def emoji_helper(selected_user, df):
+    if selected_user != "Overall":
+        df = df[df['user'] == selected_user]
+
+    emojis=[]
+    for message in df['message']:
+        for c in message:
+            if c in emoji.EMOJI_DATA:
+                emojis.append(c)
+
+    emoji_df=Counter(emojis).most_common()
+    
+    return emoji_df
 
 

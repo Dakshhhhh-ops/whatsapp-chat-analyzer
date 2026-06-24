@@ -3,6 +3,7 @@ import preprocessor
 import helper
 import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
+import pandas as pd
 
 st.sidebar.title("Whatsapp chat analyzer")
 
@@ -102,3 +103,20 @@ if uploaded_file is not None:
         ax.axis("off")
 
         st.pyplot(fig)
+
+        st.title("Emoji Analysis")
+
+        emoji_df = helper.emoji_helper(selected_box, df)
+
+        emoji_df = pd.DataFrame(
+            emoji_df,
+            columns=['emoji', 'count']
+        )
+
+        st.subheader("Top 10 Emojis")
+        st.dataframe(
+            emoji_df.head(10),
+            use_container_width=True
+        )
+
+        
