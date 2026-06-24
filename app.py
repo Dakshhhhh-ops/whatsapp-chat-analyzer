@@ -27,9 +27,9 @@ if uploaded_file is not None:
     # Show analysis if button has been clicked once
     if 'show_analysis' in st.session_state and st.session_state.show_analysis:
 
-        num_messages, num_words, num_images, num_videos, num_audio, num_stickers, num_gifs = helper.fetch_stats(selected_box, df)
+        num_messages, num_words, num_images, num_videos, num_audio, num_stickers, num_gifs, num_links = helper.fetch_stats(selected_box, df)
 
-        col1, col2 = st.columns(2)
+        col1, col2, col3 = st.columns(3)
 
         with col1:
             st.header("Total Messages")
@@ -38,6 +38,10 @@ if uploaded_file is not None:
         with col2:
             st.header("Total Words")
             st.title(num_words)
+
+        with col3:
+            st.header("Links Shared")
+            st.title(num_links)
 
         st.subheader("Media Breakdown")
 
@@ -65,3 +69,17 @@ if uploaded_file is not None:
         elif media_type == "GIFs":
             st.write("GIFs")
             st.title(num_gifs)
+
+        #finding busiest user
+        if selected_box=="Overall":
+            x, percent=helper.busiest_users(df)
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.subheader("Top Users")
+                st.dataframe(x)
+
+            with col2:
+                st.subheader("Contribution %")
+                st.dataframe(percent)
