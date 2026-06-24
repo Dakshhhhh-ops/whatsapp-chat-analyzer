@@ -1,4 +1,5 @@
 from urlextract import URLExtract
+from wordcloud import WordCloud
 
 extract = URLExtract()
 
@@ -74,6 +75,39 @@ def busiest_users(df):
     )
 
     return x, percent
+
+def create_wordcloud(selected_user,df):
+    if selected_user!="Overall":
+        df=df[df['user']==selected_user]
+
+    temp=df[df['user']!='group_notification']
+    temp = temp[
+    ~temp['message'].str.contains(
+        'image omitted|video omitted|audio omitted|sticker omitted|gif omitted',
+        case=False,
+        na=False
+    )
+]
+    with open("stopwords.txt", "r", encoding="utf-8") as f:
+        stop_words = f.read()
+
+    temp['message'] = temp['message'].str.replace(
+    r'http\S+',
+    '',
+    regex=True
+)
+
+    text=" ".join(temp['message'])
+    text=text.lower()
+
+    wc = WordCloud(
+        width=500,
+        height=500,
+        min_font_size=10,
+        background_color='white'
+    )
+    df_wc=wc.generate(text)
+    return df_wc
 
 
 

@@ -1,6 +1,8 @@
 import streamlit as st
 import preprocessor
 import helper
+import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 st.sidebar.title("Whatsapp chat analyzer")
 
@@ -77,9 +79,26 @@ if uploaded_file is not None:
             col1, col2 = st.columns(2)
 
             with col1:
-                st.subheader("Top Users")
-                st.dataframe(x)
+                st.dataframe(percent)
 
             with col2:
-                st.subheader("Contribution %")
-                st.dataframe(percent)
+                fig, ax = plt.subplots(figsize=(8,5))
+                ax.barh(x.index, x.values)
+
+                ax.set_xlabel("Messages")
+                ax.set_ylabel("Users")
+                ax.set_title("Top 5 Most Active Users")
+
+                st.pyplot(fig)
+        
+
+        st.title("Word Cloud")
+
+        df_wc = helper.create_wordcloud(selected_box, df)
+
+        fig, ax = plt.subplots()
+
+        ax.imshow(df_wc)
+        ax.axis("off")
+
+        st.pyplot(fig)
