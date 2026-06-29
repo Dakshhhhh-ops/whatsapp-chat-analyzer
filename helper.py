@@ -125,4 +125,22 @@ def emoji_helper(selected_user, df):
     
     return emoji_df
 
+def monthly_timeline(selected_user, df):
+
+    if selected_user != "Overall":
+        df = df[df['user'] == selected_user]
+
+    timeline = (
+        df.groupby(['year', 'month_num', 'month'])
+          .count()['message']
+          .reset_index()
+    )
+
+    timeline = timeline.sort_values(['year', 'month_num'])
+
+    timeline['time'] = timeline['month'] + "-" + timeline['year'].astype(str)
+
+    return timeline    
+
+
 

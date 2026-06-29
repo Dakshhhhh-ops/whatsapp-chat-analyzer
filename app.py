@@ -119,4 +119,14 @@ if uploaded_file is not None:
             use_container_width=True
         )
 
+        st.title("Monthly Timeline")
+        timeline=helper.monthly_timeline(selected_box, df)
+
+        fig, ax = plt.subplots(figsize=(10, 5))
+
+        ax.plot(timeline['time'], timeline['message'], marker='o')
+
+        plt.xticks(rotation=45)
+
+        st.pyplot(fig)
         
