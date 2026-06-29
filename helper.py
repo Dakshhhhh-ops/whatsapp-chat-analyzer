@@ -140,7 +140,43 @@ def monthly_timeline(selected_user, df):
 
     timeline['time'] = timeline['month'] + "-" + timeline['year'].astype(str)
 
-    return timeline    
+    return timeline
 
+
+def daily_timelime(selected_user, df):
+    if selected_user!="Overall":
+        df=df[df['user']==selected_user]
+
+    timeline = df.groupby('only_date').count()['message'].reset_index()
+
+    return timeline
+
+def month_activity_map(selected_user, df):
+
+    if selected_user != "Overall":
+        df = df[df['user'] == selected_user]
+
+    months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ]
+
+    month_counts = df['month'].value_counts()
+
+    return month_counts.reindex(months).fillna(0)
+
+def week_activity_map(selected_user, df):
+
+    if selected_user != "Overall":
+        df = df[df['user'] == selected_user]
+
+    days = [
+        "Monday", "Tuesday", "Wednesday",
+        "Thursday", "Friday", "Saturday", "Sunday"
+    ]
+
+    day_counts = df['day_name'].value_counts()
+
+    return day_counts.reindex(days).fillna(0)
 
 

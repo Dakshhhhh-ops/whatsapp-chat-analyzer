@@ -130,3 +130,35 @@ if uploaded_file is not None:
 
         st.pyplot(fig)
         
+        st.title("Daily Timeline")
+
+        daily_timeline=helper.daily_timelime(selected_box,df)
+        fig, ax = plt.subplots(figsize=(10,5))
+
+        ax.plot(daily_timeline['only_date'], daily_timeline['message'])
+
+        plt.xticks(rotation=45)
+
+        st.pyplot(fig)
+
+        st.title("Most Busy Month")
+
+        busy_month = helper.month_activity_map(selected_box, df)
+
+        fig, ax = plt.subplots(figsize=(8,5))
+        ax.bar(busy_month.index, busy_month.values)
+
+        plt.xticks(rotation=45)
+
+        st.pyplot(fig)
+
+        st.title("Most Busy Day")
+
+        busy_day = helper.week_activity_map(selected_box, df)
+
+        fig, ax = plt.subplots(figsize=(8,5))
+        ax.bar(busy_day.index, busy_day.values)
+
+        plt.xticks(rotation=45)
+
+        st.pyplot(fig)

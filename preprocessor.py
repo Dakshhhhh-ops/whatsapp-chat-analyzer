@@ -40,13 +40,14 @@ def preprocess(data):
 
     # period column
     period = []
+
     for hour in df['hour']:
         if hour == 23:
-            period.append('23-00')
+            period.append("23-00")
         elif hour == 0:
-            period.append('00-1')
+            period.append("00-01")
         else:
-            period.append(str(hour) + '-' + str(hour+1))
+            period.append(f"{hour:02d}-{hour+1:02d}")
 
     df['period'] = period
 
