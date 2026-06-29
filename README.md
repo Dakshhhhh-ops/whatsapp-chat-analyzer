@@ -2,7 +2,7 @@
 
 A WhatsApp conversation analyzer that turns your exported chat into a clean, interactive dashboard — message stats, timelines, emoji breakdowns, activity heatmaps, and response time analysis.
 
-**Live demo → [chatlens.streamlit.app](https://whatsapp-chat-analyzer-a2z6kq6te6fgjmupz7hxak.streamlit.app/)**
+**Live demo → [[chatlens.streamlit.app](https://whatsapp-chat-analyzer-a2z6kq6te6fgjmupz7hxak.streamlit.app/)](https://whatsapp-chat-analyzer-a2z6kq6te6fgjmupz7hxak.streamlit.app/)**
 
 ---
 
