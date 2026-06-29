@@ -179,4 +179,18 @@ def week_activity_map(selected_user, df):
 
     return day_counts.reindex(days).fillna(0)
 
+def activity_heatmap(selected_user, df):
 
+    if selected_user != "Overall":
+        df = df[df['user'] == selected_user]
+    
+
+    heatmap = df.pivot_table(
+        index='day_name',
+        columns='period',
+        values='message',
+        aggfunc='count'
+    ).fillna(0)
+    
+
+    return heatmap

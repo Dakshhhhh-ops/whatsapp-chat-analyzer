@@ -162,3 +162,21 @@ if uploaded_file is not None:
         plt.xticks(rotation=45)
 
         st.pyplot(fig)
+
+        st.title("Weekly Activity Heatmap")
+
+        heatmap = helper.activity_heatmap(selected_box, df)
+
+        fig, ax = plt.subplots(figsize=(12,5))
+
+        im = ax.imshow(heatmap, aspect='auto')
+
+        ax.set_xticks(range(len(heatmap.columns)))
+        ax.set_xticklabels(heatmap.columns, rotation=90)
+
+        ax.set_yticks(range(len(heatmap.index)))
+        ax.set_yticklabels(heatmap.index)
+
+        plt.colorbar(im)
+
+        st.pyplot(fig)
